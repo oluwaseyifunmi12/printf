@@ -1,12 +1,8 @@
 #include "main.h"
 #include <stdarg.h>
 #include <unistd.h>
+#include <stdio.h> /* Include the <stdio.h> header for sprintf */
 
-/**
- * _printf - Custom printf function
- * @format: Format string
- * Return: Number of characters printed (excluding null byte)
- */
 int _printf(const char *format, ...) {
     va_list args;
     int char_count = 0;
@@ -30,6 +26,14 @@ int _printf(const char *format, ...) {
                         char_count += write(1, s, 1);
                         s++;
                     }
+                    break;
+                }
+                case 'd':
+                case 'i': {
+                    int num = va_arg(args, int);
+                    char num_str[20]; /* A reasonable buffer size for an int */
+                    int len = sprintf(num_str, "%d", num);
+                    char_count += write(1, num_str, len);
                     break;
                 }
                 case '%': {
