@@ -5,12 +5,12 @@
  * @format: first argument
  * Return: the number of characters printed to out_put
  */
-int _printf(const char *format, ...) {
+int _printf(const char *format, ...)
+{
 	va_list args;
 	int char_count = 0;
 
 	va_start(args, format);
-	
 	while (format && *format) {
 	if	(*format != '%') {
 		char_count += write(1, format, 1);
@@ -28,7 +28,7 @@ int _printf(const char *format, ...) {
 			char_count += write(1, s, 1);
 			s++;
 		}
-		break;
+			break;
 		}
 		case 'd':
 		case 'i': {
@@ -41,7 +41,7 @@ int _printf(const char *format, ...) {
 		case '%': {
 			char_count += write(1, "%", 1);
 			break;
-                }
+		}
 		default: {
 			char_count += write(1, "%", 1);
 			char_count += write(1, format, 1);
@@ -52,5 +52,5 @@ int _printf(const char *format, ...) {
 	}
 
 	va_end(args);
-	return char_count;
+	return (char_count);
 }
